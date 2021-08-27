@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<mata charset="UTF-8">
+
+<script type="text/javascript">
+
+class Diaporama {
+
+ constructor(cible,tableau,duree) {
+ 
+  this.Imag='';
+  this.Tableau=tableau;
+  this.temp=duree;
+  this.tbmage=-1;
+  this.conteneur=document.getElementById(cible);
+  
+  this.creation();
+ }
+ 
+ diap(){
+  
+  this.tbmage++;
+  this.Image.src='images/' + this.Tableau[this.tbmage] +'.jpg';
+  
+  if(this.tbmage==this.Tableau.length-1){
+   this.tbmage=-1
+  }
+  
+  setTimeout(this.diap.bind(this), this.temp);
+ }
+
+ creation(){
+ 
+ this.Image=document.createElement('img');
+ this.Image.src=this.repertoir_image+this.Tableau[0]+'.jpg';
+ this.conteneur.appendChild(this.Image);
+ 
+ var lui=this;
+ this.Image.onmouseout=function(){lui.diap()};
+ this.Image.onmouseover=function(){clearTimeout(lui.timer)};
+ 
+ this.diap();
+}
+ 
+}
+
+
+function inimage(){
+
+ var tbdiapo_1=new Array('d1', 'd2', 'd3', 'd4', 'd5', 'd6')
+ var tbdiapo_2=new Array('d8', 'd1', 'd2', 'd3', 'd4', 'd5')
+ var tbdiapo_3=new Array('d6', 'd7', 'd8', 'd1', 'd2', 'd3')
+ 
+ new Diaporama('conteneur',tbdiapo_1,500,'ff')
+ new Diaporama('conteneur',tbdiapo_2,1000,'gg')
+ new Diaporama('conteneur',tbdiapo_3,1500,'hh')
+ 
+}
+
+onload=inimage
+
+</script>
+</head>
+<body >
+
+<div style='width:500px;margin:auto;margin-top:150px' id='conteneur'>
+
+</div>
+
+</body>
+</html>

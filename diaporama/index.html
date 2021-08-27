@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      function Diaporama(tableau, repertoire, duree) {
+        this.Tableau = tableau
+        this.temp = duree
+        this.repertoir_image = repertoire
+        this.tbmage = -1
+        this.creation()
+      }
+      Diaporama.prototype.diap = function () {
+        this.tbmage++
+        this.Image.src =
+          this.repertoir_image + this.Tableau[this.tbmage] + '.jpg'
+        if (this.tbmage == this.Tableau.length - 1) {
+          this.tbmage = -1
+        }
+
+        // be aware of losing "this" context the below line is needed cuz setTimeout is window object and "this" refers to window
+        var that = this
+        setTimeout(function () {
+          that.diap()
+        }, this.temp)
+      }
+
+      Diaporama.prototype.creation = function () {
+        this.Image = document.createElement('img')
+        this.Image.src = this.repertoir_image + this.Tableau[0] + '.jpg'
+        document.getElementById('conteneur').appendChild(this.Image)
+
+        this.diap()
+      }
+
+      function inimage() {
+        var tbimagea = new Array('d1', 'd2', 'd3', 'd4', 'd5', 'd6')
+        var tbimageb = new Array('d8', 'd1', 'd2', 'd3', 'd4', 'd5')
+        var tbimagec = new Array('d6', 'd7', 'd8', 'd1', 'd2', 'd3')
+        new Diaporama(tbimagea, 'images/', 500)
+        new Diaporama(tbimageb, 'images/', 1000)
+        new Diaporama(tbimagec, 'images/', 1500)
+      }
+      typeof window.addEventListener == 'undefined'
+        ? window.attachEvent('onload', inimage)
+        : window.addEventListener('load', inimage, false)
+    </script>
+  </head>
+  <body>
+    <div style="width: 90%; margin: auto" id="conteneur">
+      <!--  <img id="diapo_1" width="300px" height="300px" />
+      <img id="diapo_2" width="300px" height="300px" />
+      <img id="diapo_3" width="300px" height="300px" /> -->
+    </div>
+  </body>
+</html>
